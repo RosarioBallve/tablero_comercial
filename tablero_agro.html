@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tablero Comercial Agropecuario</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root {
+  --bg: #F0F2F5;
+  --card: #FFFFFF;
+  --border: #E4E8EE;
+  --text: #0F1923;
+  --muted: #7A8899;
+  --soja: #2563EB;
+  --maiz: #D97706;
+  --trigo: #16A34A;
+  --accent: #0F1923;
+  --up: #16A34A;
+  --dn: #DC2626;
+  --neu: #2563EB;
+  --radius: 12px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 13px; min-height: 100vh; }
+
+.layout { display: grid; grid-template-rows: auto auto 1fr auto; min-height: 100vh; }
+
+header { background: var(--card); border-bottom: 1px solid var(--border); padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; }
+.logo { display: flex; align-items: center; gap: 10px; }
+.logo-icon { width: 32px; height: 32px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+.logo-icon svg { width: 18px; height: 18px; fill: none; stroke: #fff; stroke-width: 1.5; }
+.logo-text { font-size: 15px; font-weight: 600; letter-spacing: -0.3px; }
+.logo-sub { font-size: 11px; color: var(--muted); margin-top: 1px; }
+.header-right { display: flex; align-items: center; gap: 16px; }
+.update-badge { font-size: 11px; color: var(--muted); background: var(--bg); padding: 4px 10px; border-radius: 20px; border: 1px solid var(--border); font-family: 'DM Mono', monospace; }
+.mes-base-ctrl { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+.mes-base-ctrl select { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 4px 8px; cursor: pointer; }
+
+.filter-bar { background: var(--card); border-bottom: 1px solid var(--border); padding: 10px 24px; display: flex; align-items: center; gap: 24px; }
+.filter-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500; }
+.cultivo-filters { display: flex; gap: 6px; }
+.cultivo-btn { padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 500; cursor: pointer; border: 1.5px solid var(--border); background: var(--bg); color: var(--muted); transition: all .15s; font-family: 'DM Sans', sans-serif; }
+.cultivo-btn.active-soja { background: #EFF6FF; color: #1D4ED8; border-color: #93C5FD; }
+.cultivo-btn.active-maiz { background: #FFFBEB; color: #92400E; border-color: #FCD34D; }
+.cultivo-btn.active-trigo { background: #F0FDF4; color: #166534; border-color: #86EFAC; }
+.sep { width: 1px; height: 20px; background: var(--border); }
+
+main { padding: 20px 24px; display: flex; flex-direction: column; gap: 16px; }
+
+.metrics-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+.metric-card { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); padding: 14px 16px; }
+.metric-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; font-weight: 500; margin-bottom: 6px; }
+.metric-val { font-size: 22px; font-weight: 600; letter-spacing: -0.5px; font-family: 'DM Mono', monospace; }
+.metric-sub { font-size: 11px; margin-top: 4px; }
+.up { color: var(--up); } .dn { color: var(--dn); } .neu { color: var(--neu); }
+
+.content-grid { display: grid; grid-template-columns: 1fr 340px; gap: 16px; }
+.right-col { display: flex; flex-direction: column; gap: 16px; }
+
+.card { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); padding: 16px; }
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.card-title { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); }
+
+table { width: 100%; border-collapse: collapse; }
+thead th { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; font-weight: 500; padding: 6px 8px; border-bottom: 1px solid var(--border); text-align: left; white-space: nowrap; }
+tbody td { padding: 8px 8px; border-bottom: 1px solid #F5F7FA; font-family: 'DM Mono', monospace; font-size: 12px; vertical-align: middle; }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: #FAFBFC; }
+
+.tag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600; font-family: 'DM Sans', sans-serif; letter-spacing: 0.2px; }
+.tag-s { background: #EFF6FF; color: #1D4ED8; }
+.tag-m { background: #FFFBEB; color: #92400E; }
+.tag-t { background: #F0FDF4; color: #166534; }
+
+.badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; font-family: 'DM Mono', monospace; }
+.b-g { background: #F0FDF4; color: #166534; }
+.b-y { background: #FFFBEB; color: #92400E; }
+.b-r { background: #FEF2F2; color: #991B1B; }
+
+.charts-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+.period-filters { display: flex; gap: 4px; }
+.period-btn { padding: 3px 10px; border-radius: 6px; font-size: 11px; font-weight: 500; cursor: pointer; border: 1px solid var(--border); background: var(--bg); color: var(--muted); transition: all .12s; font-family: 'DM Sans', sans-serif; }
+.period-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+.chart-legend { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+.leg-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--muted); }
+.leg-color { width: 20px; height: 2px; border-radius: 2px; }
+
+.chart-wrap { position: relative; width: 100%; height: 200px; }
+
+.fas-table tbody td:first-child { font-family: 'DM Sans', sans-serif; }
+
+.prob-note { font-size: 11px; color: var(--muted); margin-top: 10px; padding: 8px 10px; background: var(--bg); border-radius: 6px; line-height: 1.5; }
+
+footer { padding: 12px 24px; border-top: 1px solid var(--border); background: var(--card); font-size: 11px; color: var(--muted); display: flex; justify-content: space-between; }
+
+.hidden { display: none !important; }
+
+@media (max-width: 1100px) {
+  .metrics-row { grid-template-columns: repeat(3, 1fr); }
+  .content-grid { grid-template-columns: 1fr; }
+  .charts-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="layout">
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    </div>
+    <div>
+      <div class="logo-text">Tablero Comercial Agropecuario</div>
+      <div class="logo-sub">Análisis estratégico de precios y posiciones</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="mes-base-ctrl">
+      <span>Mes base:</span>
+      <select id="mesBaseSelect" onchange="setMesBase(this.value)">
+        <option value="5" selected>Mayo 2026</option>
+        <option value="4">Abril 2026</option>
+        <option value="6">Junio 2026</option>
+        <option value="7">Julio 2026</option>
+      </select>
+    </div>
+    <div class="update-badge" id="updateBadge">Cargando datos...</div>
+  </div>
+</header>
+
+<div class="filter-bar">
+  <span class="filter-label">Cultivo</span>
+  <div class="cultivo-filters">
+    <button class="cultivo-btn active-soja" onclick="toggleCultivo('Soja',this)">Soja</button>
+    <button class="cultivo-btn active-maiz" onclick="toggleCultivo('Maíz',this)">Maíz</button>
+    <button class="cultivo-btn active-trigo" onclick="toggleCultivo('Trigo',this)">Trigo</button>
+  </div>
+  <div class="sep"></div>
+  <span class="filter-label" id="loadStatus">Conectando a Google Sheets...</span>
+</div>
+
+<main>
+  <div class="metrics-row" id="metricsRow">
+    <div class="metric-card"><div class="metric-label">Soja disponible</div><div class="metric-val" id="m-soja">—</div><div class="metric-sub neu" id="m-soja-sub">USD/tn</div></div>
+    <div class="metric-card"><div class="metric-label">Maíz disponible</div><div class="metric-val" id="m-maiz">—</div><div class="metric-sub neu" id="m-maiz-sub">USD/tn</div></div>
+    <div class="metric-card"><div class="metric-label">Trigo disponible</div><div class="metric-val" id="m-trigo">—</div><div class="metric-sub neu" id="m-trigo-sub">USD/tn</div></div>
+    <div class="metric-card"><div class="metric-label">TC Mayorista</div><div class="metric-val" id="m-tc">—</div><div class="metric-sub neu" id="m-mep">MEP —</div></div>
+    <div class="metric-card"><div class="metric-label">Pase MEP/Oficial</div><div class="metric-val" id="m-pase">—</div><div class="metric-sub neu" id="m-pase-sub">vs. Mayorista</div></div>
+    <div class="metric-card"><div class="metric-label">Inflación REM 12m</div><div class="metric-val" id="m-inf">—</div><div class="metric-sub neu">TEA anual</div></div>
+  </div>
+
+  <div class="content-grid">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Posiciones futuras</span>
+      </div>
+      <table id="posTable">
+        <thead>
+          <tr>
+            <th>Cultivo</th><th>Posición</th><th>Días</th>
+            <th>USD/tn</th><th>$/tn</th><th>Pase USD</th>
+            <th>Prob. hist.</th><th>TNAV grano</th><th>TNAV dev.</th>
+          </tr>
+        </thead>
+        <tbody id="posTableBody">
+          <tr><td colspan="9" style="text-align:center;color:var(--muted);padding:20px;">Cargando...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="right-col">
+      <div class="card fas-table">
+        <div class="card-header"><span class="card-title">FAS teórico vs disponible</span></div>
+        <table>
+          <thead><tr><th>Cultivo</th><th>FAS teórico</th><th>Disponible $</th><th>Brecha</th></tr></thead>
+          <tbody id="fasTableBody"><tr><td colspan="4" style="text-align:center;color:var(--muted);">Cargando...</td></tr></tbody>
+        </table>
+      </div>
+      <div class="card">
+        <div class="card-header"><span class="card-title">TC futuro Rofex</span></div>
+        <table>
+          <thead><tr><th>Mes</th><th>TC estimado</th><th>TNAV dev.</th></tr></thead>
+          <tbody id="tcTableBody"><tr><td colspan="3" style="text-align:center;color:var(--muted);">Cargando...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="charts-row">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Evolución precio disponible — USD/tn</span>
+        <div class="period-filters">
+          <button class="period-btn active" onclick="setPeriod(30,this)">1m</button>
+          <button class="period-btn" onclick="setPeriod(60,this)">2m</button>
+          <button class="period-btn" onclick="setPeriod(90,this)">3m</button>
+          <button class="period-btn" onclick="setPeriod(999,this)">Todo</button>
+        </div>
+      </div>
+      <div class="chart-legend" id="evolLegend"></div>
+      <div class="chart-wrap"><canvas id="evolChart" role="img" aria-label="Evolución histórica precio disponible granos USD por tonelada"></canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Probabilidad acumulada histórica</span>
+        <div class="cultivo-filters" id="probFilters">
+          <button class="cultivo-btn active-soja" onclick="setProbCultivo('Soja',this)">Soja</button>
+          <button class="cultivo-btn" onclick="setProbCultivo('Maíz',this)">Maíz</button>
+          <button class="cultivo-btn" onclick="setProbCultivo('Trigo',this)">Trigo</button>
+        </div>
+      </div>
+      <div class="chart-wrap"><canvas id="probChart" role="img" aria-label="Curva de probabilidad acumulada histórica de precios de granos"></canvas></div>
+      <div class="prob-note" id="probNote">Seleccioná un cultivo para ver el análisis.</div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <span>Tablero Comercial Agropecuario · Datos: Google Sheets</span>
+  <span id="footerDate"></span>
+</footer>
+</div>
+
+<script>
+const SHEET_ID = '1leZcIjUDC3-gJc0QMYKLa6lS_1KJbJFdsdRMQpI1LsI';
+const BASE = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=`;
+
+let DATA = { precios: [], prob: [], pases: [], fas: [], ref: [] };
+let activeCultivos = { 'Soja': true, 'Maíz': true, 'Trigo': true };
+let activePeriod = 30;
+let activeProbCultivo = 'Soja';
+let mesBase = 5;
+let evolChart = null, probChart = null;
+
+function fmt(n, dec=0) {
+  if (n == null || n === '' || isNaN(Number(n))) return '—';
+  return Number(n).toLocaleString('es-AR', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+}
+function fmtPct(n) {
+  if (n == null || n === '' || isNaN(Number(n))) return '—';
+  return Number(n).toFixed(1) + '%';
+}
+
+async function fetchSheet(name) {
+  try {
+    const r = await fetch(BASE + encodeURIComponent(name));
+    const txt = await r.text();
+    const json = JSON.parse(txt.replace(/^[^{]*/, '').replace(/[^}]*$/, ''));
+    const cols = json.table.cols.map(c => c.label);
+    return json.table.rows.map(row => {
+      const obj = {};
+      cols.forEach((col, i) => {
+        const cell = row.c[i];
+        obj[col] = cell ? (cell.v !== undefined ? cell.v : null) : null;
+      });
+      return obj;
+    });
+  } catch(e) { return []; }
+}
+
+async function loadAll() {
+  document.getElementById('loadStatus').textContent = 'Conectando...';
+  const [precios, prob, pases, fas, ref] = await Promise.all([
+    fetchSheet('precios_calculados'),
+    fetchSheet('probabilidades'),
+    fetchSheet('pases_tc'),
+    fetchSheet('fas_y_tnav'),
+    fetchSheet('inflacion_tc_ref'),
+  ]);
+  DATA = { precios, prob, pases, fas, ref };
+
+  const lastFecha = precios.length ? (precios[0].fecha_proceso || '') : '';
+  document.getElementById('updateBadge').textContent = lastFecha ? `Actualizado: ${String(lastFecha).slice(0,10)}` : 'Datos cargados';
+  document.getElementById('loadStatus').textContent = `${precios.length} posiciones cargadas`;
+  document.getElementById('footerDate').textContent = new Date().toLocaleDateString('es-AR', {day:'2-digit',month:'2-digit',year:'numeric', hour:'2-digit', minute:'2-digit'});
+
+  renderAll();
+}
+
+function renderAll() {
+  renderMetrics();
+  renderPosTable();
+  renderFasTable();
+  renderTcTable();
+  renderEvolChart();
+  renderProbChart();
+}
+
+function renderMetrics() {
+  const ref = DATA.ref;
+  const precios = DATA.precios;
+
+  const getDisp = (prod) => {
+    const rows = precios.filter(r => r.producto === prod && r.posicion === 'disponible');
+    return rows.length ? rows[0] : null;
+  };
+
+  ['Soja','Maíz','Trigo'].forEach(prod => {
+    const id = prod === 'Maíz' ? 'maiz' : prod.toLowerCase();
+    const row = getDisp(prod);
+    document.getElementById(`m-${id}`).textContent = row ? fmt(row.precio_usd_tn, 1) : '—';
+    document.getElementById(`m-${id}-sub`).textContent = 'USD/tn';
+  });
+
+  const tcRow = ref.find(r => r.tipo === 'TC Mayorista');
+  const mepRow = ref.find(r => r.tipo === 'TC MEP');
+  document.getElementById('m-tc').textContent = tcRow ? '$' + fmt(tcRow.valor) : '—';
+  document.getElementById('m-mep').textContent = mepRow ? 'MEP $' + fmt(mepRow.valor) : 'MEP —';
+
+  const paseRow = DATA.pases.find(r => String(r.tipo).includes('MEP'));
+  document.getElementById('m-pase').textContent = paseRow ? fmtPct(paseRow.pase_pct) : '—';
+
+  const infRow = ref.find(r => r.tipo === 'TEA Inflación REM 12 meses');
+  document.getElementById('m-inf').textContent = infRow ? fmtPct(infRow.valor) : '—';
+}
+
+function renderPosTable() {
+  const tbody = document.getElementById('posTableBody');
+  const cultivos = ['Soja','Maíz','Trigo'].filter(c => activeCultivos[c]);
+  const rows = DATA.precios.filter(r => cultivos.includes(r.producto));
+
+  if (!rows.length) { tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;color:var(--muted);padding:20px;">Sin datos para los cultivos seleccionados</td></tr>'; return; }
+
+  const probMap = {};
+  DATA.prob.forEach(r => { probMap[`${r.producto}|${r.posicion}`] = r; });
+  const fasMap = {};
+  DATA.fas.forEach(r => { fasMap[`${r.producto}|${r.posicion}`] = r; });
+
+  const sorted = [...rows].sort((a,b) => {
+    const order = {'Soja':0,'Maíz':1,'Trigo':2};
+    if (order[a.producto] !== order[b.producto]) return order[a.producto] - order[b.producto];
+    if (a.posicion === 'disponible') return -1;
+    if (b.posicion === 'disponible') return 1;
+    return (a.dias || 999) - (b.dias || 999);
+  });
+
+  tbody.innerHTML = sorted.map(r => {
+    const tagCls = r.producto === 'Soja' ? 'tag-s' : r.producto === 'Maíz' ? 'tag-m' : 'tag-t';
+    const probRow = probMap[`${r.producto}|${r.posicion}`];
+    const fasRow = fasMap[`${r.producto}|${r.posicion}`];
+    const prob = probRow ? probRow.prob_historica_pct : null;
+    const badgeCls = prob == null ? '' : prob >= 66 ? 'b-g' : prob >= 33 ? 'b-y' : 'b-r';
+    const tnav = fasRow ? fasRow.tnav_grano_pct : null;
+    const tnavDev = r.posicion !== 'disponible' ? getTnavDev(r) : null;
+    const diasStr = r.posicion === 'disponible' ? '—' : (r.dias != null ? fmt(r.dias) : '—');
+
+    return `<tr>
+      <td><span class="tag ${tagCls}">${r.producto}</span></td>
+      <td style="font-family:'DM Sans',sans-serif;font-weight:500;">${r.posicion}</td>
+      <td>${diasStr}</td>
+      <td>${fmt(r.precio_usd_tn, 1)}</td>
+      <td>${fmt(r.precio_ars_tc_spot)}</td>
+      <td>${r.pase_usd_tn != null && r.pase_usd_tn !== '' ? fmt(r.pase_usd_tn, 1) : '—'}</td>
+      <td>${prob != null ? `<span class="badge ${badgeCls}">${fmtPct(prob)}</span>` : '—'}</td>
+      <td>${tnav != null ? fmtPct(tnav) : '—'}</td>
+      <td>${tnavDev != null ? fmtPct(tnavDev) : '—'}</td>
+    </tr>`;
+  }).join('');
+}
+
+function getTnavDev(r) {
+  if (!r.posicion || r.posicion === 'disponible') return null;
+  const fasRow = DATA.fas.find(f => f.producto === r.producto && f.posicion === r.posicion);
+  return fasRow && fasRow.tnav_grano_pct != null ? null : null;
+}
+
+function renderFasTable() {
+  const tbody = document.getElementById('fasTableBody');
+  const cultivos = ['Soja','Maíz','Trigo'].filter(c => activeCultivos[c]);
+  const rows = DATA.fas.filter(r => cultivos.includes(r.producto) && r.posicion !== 'disponible');
+
+  const byProd = {};
+  rows.forEach(r => { if (!byProd[r.producto]) byProd[r.producto] = r; });
+
+  const dispMap = {};
+  DATA.precios.filter(r => r.posicion === 'disponible').forEach(r => { dispMap[r.producto] = r.precio_ars_tc_spot; });
+
+  const fasMap = {};
+  DATA.fas.forEach(r => { if (r.fas_teorico_ars) fasMap[r.producto] = r.fas_teorico_ars; });
+
+  tbody.innerHTML = Object.keys(byProd).map(prod => {
+    const r = byProd[prod];
+    const tagCls = prod === 'Soja' ? 'tag-s' : prod === 'Maíz' ? 'tag-m' : 'tag-t';
+    const fas = fasMap[prod];
+    const disp = dispMap[prod];
+    const brecha = fas && disp ? disp - fas : null;
+    const bCls = brecha == null ? '' : brecha >= 0 ? 'b-g' : 'b-r';
+    return `<tr>
+      <td><span class="tag ${tagCls}">${prod}</span></td>
+      <td>$${fmt(fas)}</td>
+      <td>$${fmt(disp)}</td>
+      <td><span class="badge ${bCls}">${brecha != null ? (brecha >= 0 ? '+' : '') + fmt(brecha) : '—'}</span></td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="4" style="text-align:center;color:var(--muted);">Sin datos</td></tr>';
+}
+
+function renderTcTable() {
+  const tbody = document.getElementById('tcTableBody');
+  const rows = DATA.pases.filter(r => String(r.tipo).includes('TC Futuro'));
+  tbody.innerHTML = rows.slice(0,6).map(r => {
+    const mes = String(r.tipo).replace('TC Futuro ','');
+    return `<tr>
+      <td style="font-family:'DM Sans',sans-serif;">${mes}</td>
+      <td>$${fmt(r.tc_referencia)}</td>
+      <td>${r.tnav_devaluacion_pct != null ? `<span class="badge b-y">${fmtPct(r.tnav_devaluacion_pct)}</span>` : '—'}</td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="3" style="text-align:center;color:var(--muted);">Sin datos</td></tr>';
+}
+
+function renderEvolChart() {
+  const cultivos = ['Soja','Maíz','Trigo'].filter(c => activeCultivos[c]);
+  const colors = { 'Soja': '#2563EB', 'Maíz': '#D97706', 'Trigo': '#16A34A' };
+  const dashes = { 'Soja': [], 'Maíz': [6,3], 'Trigo': [2,4] };
+
+  const allDates = [...new Set(
+    DATA.precios.filter(r => r.posicion === 'disponible' && cultivos.includes(r.producto))
+      .map(r => String(r.fecha_dato).slice(0,10))
+      .filter(Boolean)
+  )].sort();
+
+  const cutoff = activePeriod >= 999 ? allDates[0] : (() => {
+    const d = new Date(); d.setDate(d.getDate() - activePeriod);
+    return d.toISOString().slice(0,10);
+  })();
+
+  const dates = allDates.filter(d => d >= cutoff);
+  const labels = dates.map(d => { const p = d.split('-'); return `${p[2]}/${p[1]}`; });
+
+  const datasets = cultivos.map(prod => {
+    const byDate = {};
+    DATA.precios.filter(r => r.producto === prod && r.posicion === 'disponible')
+      .forEach(r => { byDate[String(r.fecha_dato).slice(0,10)] = r.precio_usd_tn; });
+    return {
+      label: prod,
+      data: dates.map(d => byDate[d] != null ? Number(byDate[d]) : null),
+      borderColor: colors[prod],
+      backgroundColor: 'transparent',
+      borderWidth: 2,
+      borderDash: dashes[prod],
+      pointRadius: 3,
+      pointBackgroundColor: colors[prod],
+      tension: 0.3,
+      spanGaps: true,
+    };
+  });
+
+  const legend = document.getElementById('evolLegend');
+  legend.innerHTML = cultivos.map(c => `<span class="leg-item">
+    <span class="leg-color" style="background:${colors[c]};${dashes[c].length ? 'border-top:2px dashed '+colors[c]+';background:transparent;height:0;' : ''}"></span>${c}
+  </span>`).join('');
+
+  if (evolChart) evolChart.destroy();
+  evolChart = new Chart(document.getElementById('evolChart'), {
+    type: 'line',
+    data: { labels, datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: USD ${ctx.parsed.y != null ? ctx.parsed.y.toFixed(1) : '—'}` } } },
+      scales: {
+        x: { ticks: { font: { size: 10, family: 'DM Mono' }, maxRotation: 45, autoSkip: true } },
+        y: { ticks: { font: { size: 10, family: 'DM Mono' }, callback: v => 'USD ' + v }, grid: { color: 'rgba(0,0,0,0.04)' } }
+      }
+    }
+  });
+}
+
+function renderProbChart() {
+  const prod = activeProbCultivo;
+  const colors = { 'Soja': '#2563EB', 'Maíz': '#D97706', 'Trigo': '#16A34A' };
+  const color = colors[prod];
+
+  const probRow = DATA.prob.find(r => r.producto === prod);
+  const histPrices = DATA.precios.filter(r => r.producto === prod && r.posicion !== 'disponible' && r.posicion !== 'fas_teorico' && r.posicion !== 'pizarra');
+
+  if (!probRow && !histPrices.length) {
+    document.getElementById('probNote').textContent = 'Sin datos históricos suficientes para este cultivo.';
+    return;
+  }
+
+  const allPrices = DATA.precios.filter(r => r.producto === prod && r.posicion !== 'disponible' && r.posicion !== 'fas_teorico' && r.posicion !== 'pizarra' && r.precio_usd_tn).map(r => Number(r.precio_usd_tn)).filter(v => !isNaN(v));
+
+  if (!allPrices.length) return;
+
+  const sorted = [...allPrices].sort((a,b) => a-b);
+  const cdfPoints = sorted.map((v,i) => ({ x: v, y: parseFloat(((i+1)/sorted.length*100).toFixed(1)) }));
+
+  const currentRows = DATA.precios.filter(r => r.producto === prod && r.posicion !== 'disponible' && r.posicion !== 'fas_teorico' && r.posicion !== 'pizarra');
+  const scatterPoints = currentRows.map(r => {
+    const v = Number(r.precio_usd_tn);
+    const prob = parseFloat((sorted.filter(p => p <= v).length / sorted.length * 100).toFixed(1));
+    return { x: v, y: prob, label: r.posicion };
+  }).filter(p => !isNaN(p.x));
+
+  if (probChart) probChart.destroy();
+  probChart = new Chart(document.getElementById('probChart'), {
+    type: 'line',
+    data: {
+      datasets: [
+        { label: 'Distribución histórica', data: cdfPoints, borderColor: color, borderWidth: 2, backgroundColor: 'transparent', pointRadius: 0, tension: 0.4, type: 'line' },
+        { label: 'Precio actual', data: scatterPoints, borderColor: '#fff', backgroundColor: '#DC2626', pointRadius: 7, pointHoverRadius: 9, pointBorderWidth: 2, showLine: false, type: 'scatter' }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => {
+              if (ctx.dataset.type === 'scatter') return ` ${ctx.raw.label}: USD ${ctx.parsed.x.toFixed(1)} → P${ctx.parsed.y}%`;
+              return ` USD ${ctx.parsed.x.toFixed(1)} → P${ctx.parsed.y}%`;
+            }
+          }
+        }
+      },
+      scales: {
+        x: { type: 'linear', ticks: { font: { size: 10, family: 'DM Mono' }, callback: v => 'USD '+v }, grid: { color: 'rgba(0,0,0,0.04)' } },
+        y: { min: 0, max: 100, ticks: { font: { size: 10, family: 'DM Mono' }, callback: v => v+'%' }, grid: { color: 'rgba(0,0,0,0.04)' } }
+      }
+    }
+  });
+
+  const noteLines = scatterPoints.map(p => `${p.label}: USD ${p.x.toFixed(1)} en P${p.y}%`).join(' · ');
+  document.getElementById('probNote').textContent = noteLines || 'Puntos rojos = precio actual de cada posición.';
+}
+
+function toggleCultivo(cultivo, btn) {
+  activeCultivos[cultivo] = !activeCultivos[cultivo];
+  const cls = cultivo === 'Soja' ? 'active-soja' : cultivo === 'Maíz' ? 'active-maiz' : 'active-trigo';
+  if (activeCultivos[cultivo]) { btn.classList.add(cls); } else { btn.className = 'cultivo-btn'; }
+  renderPosTable(); renderFasTable(); renderEvolChart();
+}
+
+function setPeriod(p, btn) {
+  activePeriod = p;
+  document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderEvolChart();
+}
+
+function setProbCultivo(c, btn) {
+  activeProbCultivo = c;
+  document.querySelectorAll('#probFilters .cultivo-btn').forEach(b => {
+    b.className = 'cultivo-btn';
+  });
+  const cls = c === 'Soja' ? 'active-soja' : c === 'Maíz' ? 'active-maiz' : 'active-trigo';
+  btn.classList.add(cls);
+  renderProbChart();
+}
+
+function setMesBase(v) { mesBase = parseInt(v); renderAll(); }
+
+loadAll();
+</script>
+</body>
+</html>
