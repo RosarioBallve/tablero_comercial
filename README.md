@@ -1,7 +1,7 @@
 # Tablero Comercial Agropecuario · Puntal Agro
 
 ## 🔗 Link del tablero
-**https://rpuntal-agro.github.io/tablero_comercial/tablero_agro.html**
+**https://puntal-agro.github.io/tablero_comercial/tablero_agro.html**
 
 ## Cómo actualizar los datos
 1. Abrí Claude (claude.ai)
