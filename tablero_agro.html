@@ -39,7 +39,6 @@ main{padding:18px 24px;display:flex;flex-direction:column;gap:14px}
 .mc-val-sm{font-size:13px;font-weight:500;font-family:var(--mono);color:var(--muted)}
 .mc-s{border-left-color:#185FA5}.mc-m{border-left-color:#854F0B}.mc-t{border-left-color:#3B6D11}.mc-i{border-left-color:var(--muted)}
 .mc-dim{opacity:.2}
-.mc-inf{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:12px 16px;min-width:120px;border-left:3px solid var(--muted)}
 .g2{display:grid;grid-template-columns:1fr 240px;gap:14px}
 .card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:14px}
 .chd{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
@@ -91,7 +90,6 @@ footer{padding:10px 24px;border-top:1px solid var(--border);background:var(--car
 
 <main>
   <div class="metrics" id="metricsRow"></div>
-
   <div class="g2">
     <div class="card">
       <div class="chd"><span class="ct">Posiciones futuras al mes actual</span></div>
@@ -104,11 +102,10 @@ footer{padding:10px 24px;border-top:1px solid var(--border);background:var(--car
       <div class="chd"><span class="ct">TC futuro Rofex</span></div>
       <div class="scroll-y">
         <table><thead><tr><th>Mes</th><th>TC</th><th>TNAV dev.</th></tr></thead>
-        <tbody id="tcBody"></tbody></table>
+        <tbody id="tcBody"></tbody>
       </div>
     </div>
   </div>
-
   <div class="charts">
     <div class="card">
       <div class="chd">
@@ -171,7 +168,16 @@ let eC=null, pC=null;
 const f=(v,d=0)=>v==null||isNaN(+v)?'—':Number(v).toLocaleString('es-AR',{minimumFractionDigits:d,maximumFractionDigits:d});
 const fp=v=>v==null||isNaN(+v)?'—':Number(v).toFixed(1)+'%';
 const getDisp=prod=>DISP_MAP[`${prod}|${mesBase}`]||null;
-const getTcBase=()=>{const r=TC_FUT.find(t=>t.mes===mesBase&&t.año===2026);return r?r.tc:TC_SPOT;};
+
+// TC futuro para un mes dado (busca en TC_FUT, si no usa spot)
+function getTcFut(mes, año=2026){
+  const r=TC_FUT.find(t=>t.mes===mes&&t.año===año) || TC_FUT.find(t=>t.mes===mes);
+  return r?r.tc:TC_SPOT;
+}
+
+// TC del mes base (para TNAV dev)
+const getTcBase=()=>getTcFut(mesBase);
+
 const calcDias=(mp,añoPos)=>Math.max(0,Math.round((new Date(añoPos,mp-1,1)-new Date(2026,mesBase-1,1))/864e5));
 const calcProb=(serie,precio)=>serie&&serie.length?parseFloat((serie.filter(v=>v<=precio).length/serie.length*100).toFixed(1)):null;
 const tnavGrano=(fUSD,dUSD,d)=>(!dUSD||!d)?null:((fUSD/dUSD)-1)*365/d*100;
@@ -210,6 +216,8 @@ function renderPos(){
     const d=getDisp(prod);
     const serie=DISP_HIST[prod]||[];
     const tc=TAG[prod];
+    // TC del mes base para fila disponible
+    const tcDispARS=d?Math.round(d*getTcFut(mesBase)):null;
     const probD=d?calcProb(serie,d):null;
     const bcD=probD!=null?(probD>=66?'bg':probD>=33?'by':'br'):'';
     html+=`<tr>
@@ -217,8 +225,11 @@ function renderPos(){
       <td class="tdname">disponible</td><td>—</td>
       <td>${f(d,1)}</td>
       <td>${probD!=null?`<span class="bdg ${bcD}">${fp(probD)}</span>`:'—'}</td>
-      <td>—</td><td>${d?'$'+f(Math.round(d*TC_SPOT)):'—'}</td><td>—</td><td>—</td>
+      <td>—</td>
+      <td>${tcDispARS?'$'+f(tcDispARS):'—'}</td>
+      <td>—</td><td>—</td>
     </tr>`;
+    // Posiciones futuras (mes > mesBase)
     Object.entries(FUT_MAP).filter(([k])=>k.startsWith(prod+'|')).forEach(([k,usd])=>{
       const mp=parseInt(k.split('|')[1]);
       if(mp<=mesBase)return;
@@ -228,8 +239,9 @@ function renderPos(){
       const pase=d!=null?usd-d:null;
       const probF=calcProb(serie,usd);
       const tv=tnavGrano(usd,d,di);
-      const tcR=TC_FUT.find(t=>t.mes===mp);
-      const tcPos=tcR?tcR.tc:TC_SPOT;
+      // $/tn = precio futuro USD × TC futuro del mismo mes
+      const tcPos=getTcFut(mp,añoPos);
+      const arsPos=Math.round(usd*tcPos);
       const tvD=tnavDev(tcPos,tcBase,di);
       const bc=probF!=null?(probF>=66?'bg':probF>=33?'by':'br'):'';
       html+=`<tr>
@@ -239,7 +251,7 @@ function renderPos(){
         <td>${f(usd,1)}</td>
         <td>${probF!=null?`<span class="bdg ${bc}">${fp(probF)}</span>`:'—'}</td>
         <td>${pase!=null?f(pase,1):'—'}</td>
-        <td>${usd?'$'+f(Math.round(usd*TC_SPOT)):'—'}</td>
+        <td>${'$'+f(arsPos)}</td>
         <td>${tv!=null?fp(tv):'—'}</td>
         <td>${tvD!=null?fp(tvD):'—'}</td>
       </tr>`;
@@ -250,16 +262,16 @@ function renderPos(){
 
 function renderTC(){
   const tcBase=getTcBase();
-  const hoy=new Date(2026,4,9);
   const base=new Date(2026,mesBase-1,1);
-  const rows=TC_FUT.filter(r=>new Date(r.año,r.mes-1,1)>hoy&&new Date(r.año,r.mes-1,1)>base);
+  // Mostrar desde mes actual/base inclusive
+  const rows=TC_FUT.filter(r=>new Date(r.año,r.mes-1,1)>=base);
   document.getElementById('tcBody').innerHTML=rows.map(r=>{
     const d=Math.max(1,Math.round((new Date(r.año,r.mes-1,1)-base)/864e5));
-    const tv=tnavDev(r.tc,tcBase,d);
+    const tv=r.mes===mesBase?null:tnavDev(r.tc,tcBase,d);
     return`<tr>
       <td class="tdname">${ML[r.mes]}-${String(r.año).slice(2)}</td>
       <td>$${f(r.tc)}</td>
-      <td><span class="bdg by">${tv!=null?fp(tv):'—'}</span></td>
+      <td>${tv!=null?`<span class="bdg by">${fp(tv)}</span>`:'—'}</td>
     </tr>`;
   }).join('')||'<tr><td colspan="3" style="text-align:center;color:var(--muted);padding:8px">Sin datos</td></tr>';
 }
