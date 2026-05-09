@@ -9,7 +9,7 @@
 <style>
 :root{--bg:#F0F2F5;--card:#fff;--border:#E4E8EE;--text:#0F1923;--muted:#7A8899;--radius:12px;}
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:13px;min-height:100vh;}
+body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--text);font-size:13px;min-height:100vh;}
 header{background:var(--card);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;justify-content:space-between;align-items:center;}
 .logo{display:flex;align-items:center;gap:10px;}
 .logo-icon{width:32px;height:32px;background:#0F1923;border-radius:8px;display:flex;align-items:center;justify-content:center;}
@@ -17,13 +17,13 @@ header{background:var(--card);border-bottom:1px solid var(--border);padding:12px
 .logo-title{font-size:15px;font-weight:600;letter-spacing:-.3px;}
 .logo-sub{font-size:11px;color:var(--muted);}
 .hright{display:flex;align-items:center;gap:14px;}
-.badge{font-size:11px;color:var(--muted);background:var(--bg);padding:4px 10px;border-radius:20px;border:1px solid var(--border);font-family:'DM Mono',monospace;}
+.badge{font-size:11px;color:var(--muted);background:var(--bg);padding:4px 10px;border-radius:20px;border:1px solid var(--border);font-family:"DM Mono",monospace;}
 .mes-ctrl{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);}
-.mes-ctrl select{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:4px 8px;cursor:pointer;}
+.mes-ctrl select{font-family:"DM Sans",sans-serif;font-size:12px;font-weight:500;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:4px 8px;cursor:pointer;}
 .fbar{background:var(--card);border-bottom:1px solid var(--border);padding:8px 24px;display:flex;align-items:center;gap:16px;}
 .fl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-weight:500;}
 .pills{display:flex;gap:5px;}
-.pill{padding:4px 12px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:1.5px solid var(--border);background:var(--bg);color:var(--muted);transition:all .12s;font-family:'DM Sans',sans-serif;}
+.pill{padding:4px 12px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:1.5px solid var(--border);background:var(--bg);color:var(--muted);transition:all .12s;font-family:"DM Sans",sans-serif;}
 .ps{background:#EFF6FF;color:#1D4ED8;border-color:#93C5FD;}
 .pm{background:#FFFBEB;color:#92400E;border-color:#FCD34D;}
 .pt{background:#F0FDF4;color:#166534;border-color:#86EFAC;}
@@ -32,7 +32,7 @@ main{padding:18px 24px;display:flex;flex-direction:column;gap:14px;}
 .metrics{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;}
 .mc{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:12px 14px;}
 .mc-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;font-weight:500;margin-bottom:5px;}
-.mc-val{font-size:20px;font-weight:600;letter-spacing:-.5px;font-family:'DM Mono',monospace;}
+.mc-val{font-size:20px;font-weight:600;letter-spacing:-.5px;font-family:"DM Mono",monospace;}
 .mc-sub{font-size:11px;margin-top:3px;}
 .neu{color:#2563EB;}.up{color:#16A34A;}.dn{color:#DC2626;}
 .g2{display:grid;grid-template-columns:1fr 320px;gap:14px;}
@@ -42,22 +42,25 @@ main{padding:18px 24px;display:flex;flex-direction:column;gap:14px;}
 .ct{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);}
 table{width:100%;border-collapse:collapse;}
 thead th{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;font-weight:500;padding:5px 7px;border-bottom:1px solid var(--border);text-align:left;white-space:nowrap;}
-tbody td{padding:7px 7px;border-bottom:1px solid #F5F7FA;font-family:'DM Mono',monospace;font-size:12px;vertical-align:middle;}
+tbody td{padding:7px 7px;border-bottom:1px solid #F5F7FA;font-family:"DM Mono",monospace;font-size:12px;vertical-align:middle;}
 tbody tr:last-child td{border-bottom:none;}
 tbody tr:hover td{background:#FAFBFC;}
-.tag{display:inline-block;padding:2px 7px;border-radius:10px;font-size:10px;font-weight:600;font-family:'DM Sans',sans-serif;}
+.tag{display:inline-block;padding:2px 7px;border-radius:10px;font-size:10px;font-weight:600;font-family:"DM Sans",sans-serif;}
 .ts{background:#EFF6FF;color:#1D4ED8;}.tm{background:#FFFBEB;color:#92400E;}.tt{background:#F0FDF4;color:#166534;}
-.bdg{display:inline-block;padding:2px 7px;border-radius:10px;font-size:11px;font-weight:600;font-family:'DM Mono',monospace;}
+.bdg{display:inline-block;padding:2px 7px;border-radius:10px;font-size:11px;font-weight:600;font-family:"DM Mono",monospace;}
 .bg{background:#F0FDF4;color:#166534;}.by{background:#FFFBEB;color:#92400E;}.br{background:#FEF2F2;color:#991B1B;}
 .charts{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 .pps{display:flex;gap:3px;}
-.pp{padding:3px 9px;border-radius:6px;font-size:11px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:var(--bg);color:var(--muted);font-family:'DM Sans',sans-serif;}
+.pp{padding:3px 9px;border-radius:6px;font-size:11px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:var(--bg);color:var(--muted);font-family:"DM Sans",sans-serif;}
 .pp.on{background:#0F1923;color:#fff;border-color:#0F1923;}
 .legrow{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
 .leg{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--muted);}
 .cw{position:relative;width:100%;height:190px;}
 .pnote{font-size:11px;color:var(--muted);margin-top:8px;padding:7px 10px;background:var(--bg);border-radius:6px;line-height:1.5;}
 footer{padding:10px 24px;border-top:1px solid var(--border);background:var(--card);font-size:11px;color:var(--muted);display:flex;justify-content:space-between;}
+.loading{text-align:center;padding:40px;color:var(--muted);font-size:13px;}
+.spinner{display:inline-block;width:20px;height:20px;border:2px solid var(--border);border-top-color:#0F1923;border-radius:50%;animation:spin .8s linear infinite;margin-right:8px;vertical-align:middle;}
+@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
@@ -69,13 +72,9 @@ footer{padding:10px 24px;border-top:1px solid var(--border);background:var(--car
   <div class="hright">
     <div class="mes-ctrl">
       <span>Mes base:</span>
-      <select id="mesSelect" onchange="setMesBase(parseInt(this.value))">
-        <option value="2">Febrero 2026</option>
-        <option value="3">Marzo 2026</option>
-        <option value="4" selected>Abril 2026</option>
-      </select>
+      <select id="mesSelect" onchange="setMesBase(parseInt(this.value))"></select>
     </div>
-    <div class="badge">Datos: 07/05/2026</div>
+    <div class="badge" id="updBadge"><span class="spinner"></span>Cargando...</div>
   </div>
 </header>
 
@@ -87,7 +86,7 @@ footer{padding:10px 24px;border-top:1px solid var(--border);background:var(--car
     <button class="pill pt" onclick="toggleC('Trigo',this)">Trigo</button>
   </div>
   <div class="sep"></div>
-  <span class="fl">Puntal Agro</span>
+  <span class="fl" id="statusLbl">Conectando a Google Sheets...</span>
 </div>
 
 <main>
@@ -95,27 +94,27 @@ footer{padding:10px 24px;border-top:1px solid var(--border);background:var(--car
     <div class="mc"><div class="mc-lbl">Soja disponible</div><div class="mc-val" id="ms">—</div><div class="mc-sub neu">USD/tn · mes base</div></div>
     <div class="mc"><div class="mc-lbl">Maíz disponible</div><div class="mc-val" id="mm">—</div><div class="mc-sub neu">USD/tn · mes base</div></div>
     <div class="mc"><div class="mc-lbl">Trigo disponible</div><div class="mc-val" id="mt">—</div><div class="mc-sub neu">USD/tn · mes base</div></div>
-    <div class="mc"><div class="mc-lbl">TC Mayorista</div><div class="mc-val">$1.384</div><div class="mc-sub neu">MEP $1.428</div></div>
-    <div class="mc"><div class="mc-lbl">Pase MEP/Oficial</div><div class="mc-val">3.2%</div><div class="mc-sub neu">Blue 0.5%</div></div>
-    <div class="mc"><div class="mc-lbl">Inflación REM 12m</div><div class="mc-val">23.8%</div><div class="mc-sub neu">TEA anual</div></div>
+    <div class="mc"><div class="mc-lbl">TC Mayorista</div><div class="mc-val" id="mtc">—</div><div class="mc-sub neu" id="mmep">MEP —</div></div>
+    <div class="mc"><div class="mc-lbl">Pase MEP/Oficial</div><div class="mc-val" id="mpase">—</div><div class="mc-sub neu">vs. Mayorista</div></div>
+    <div class="mc"><div class="mc-lbl">Inflación REM 12m</div><div class="mc-val" id="minf">—</div><div class="mc-sub neu">TEA anual</div></div>
   </div>
 
   <div class="g2">
     <div class="card">
       <div class="chd"><span class="ct">Posiciones futuras al mes base</span></div>
       <table><thead><tr><th>Cultivo</th><th>Posición</th><th>Días</th><th>USD/tn</th><th>$/tn</th><th>Pase USD</th><th>Prob. hist.</th><th>TNAV grano</th></tr></thead>
-      <tbody id="posBody"></tbody></table>
+      <tbody id="posBody"><tr><td colspan="8" class="loading"><span class="spinner"></span>Cargando...</td></tr></tbody></table>
     </div>
     <div class="rcol">
       <div class="card">
         <div class="chd"><span class="ct">FAS teórico vs disponible</span></div>
         <table><thead><tr><th>Cultivo</th><th>FAS teórico</th><th>Disponible $</th><th>Brecha</th></tr></thead>
-        <tbody id="fasBody"></tbody></table>
+        <tbody id="fasBody"><tr><td colspan="4" class="loading"><span class="spinner"></span></td></tr></tbody></table>
       </div>
       <div class="card">
         <div class="chd"><span class="ct">TC futuro Rofex</span></div>
         <table><thead><tr><th>Mes</th><th>TC estimado</th><th>TNAV dev.</th></tr></thead>
-        <tbody id="tcBody"></tbody></table>
+        <tbody id="tcBody"><tr><td colspan="3" class="loading"><span class="spinner"></span></td></tr></tbody></table>
       </div>
     </div>
   </div>
@@ -126,13 +125,13 @@ footer{padding:10px 24px;border-top:1px solid var(--border);background:var(--car
         <span class="ct">Evolución precio disponible — USD/tn</span>
         <div class="pps">
           <button class="pp on" onclick="setPer(30,this)">1m</button>
-          <button class="pp" onclick="setPer(60,this)">2m</button>
           <button class="pp" onclick="setPer(90,this)">3m</button>
+          <button class="pp" onclick="setPer(180,this)">6m</button>
           <button class="pp" onclick="setPer(999,this)">Todo</button>
         </div>
       </div>
       <div class="legrow" id="eLeg"></div>
-      <div class="cw"><canvas id="eChart" role="img" aria-label="Evolución precio disponible granos USD por tonelada"></canvas></div>
+      <div class="cw"><canvas id="eChart" role="img" aria-label="Evolución precio disponible granos"></canvas></div>
     </div>
     <div class="card">
       <div class="chd">
@@ -144,7 +143,7 @@ footer{padding:10px 24px;border-top:1px solid var(--border);background:var(--car
         </div>
       </div>
       <div class="cw"><canvas id="pChart" role="img" aria-label="Curva de probabilidad acumulada histórica"></canvas></div>
-      <div class="pnote" id="pNote">Seleccioná un cultivo.</div>
+      <div class="pnote" id="pNote">Cargando datos...</div>
     </div>
   </div>
 </main>
@@ -155,49 +154,168 @@ footer{padding:10px 24px;border-top:1px solid var(--border);background:var(--car
 </footer>
 
 <script>
+const SHEET_ID = '1leZcIjUDC3-gJc0QMYKLa6lS_1KJbJFdsdRMQpI1LsI';
+const BASE = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=`;
 const ML = ['','Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
 const COLOR = {Soja:'#2563EB',"Maíz":'#D97706',Trigo:'#16A34A'};
 const DASH  = {Soja:[],       "Maíz":[6,3],     Trigo:[2,4]};
 const TAG   = {Soja:'ts',     "Maíz":'tm',       Trigo:'tt'};
+const MESES = {enero:1,febrero:2,marzo:3,abril:4,mayo:5,junio:6,julio:7,agosto:8,septiembre:9,octubre:10,noviembre:11,diciembre:12};
 
-const DB = {
-  disp: {
-    Soja:  [{m:4,p:320.05},{m:3,p:335.2},{m:2,p:332.65}],
-    "Maíz":[{m:4,p:183.25},{m:3,p:181.02},{m:2,p:183.0}],
-    Trigo: [{m:4,p:193.55},{m:3,p:189.43},{m:2,p:184.25}]
-  },
-  fut: [
-    {prod:"Maíz",  pos:"abril",    mes:4,  usd:194.0},
-    {prod:"Maíz",  pos:"junio",    mes:6,  usd:187.0},
-    {prod:"Soja",  pos:"mayo",     mes:5,  usd:319.2},
-    {prod:"Trigo", pos:"enero",    mes:1,  usd:219.22},
-    {prod:"Trigo", pos:"diciembre",mes:12, usd:227.3}
-  ],
-  hist: {
-    "Soja|mayo":      [317,318.72,318.72,318.72,319.2,320.64,320.64,320.7,321,321.5,322.8,323,323.41,323.41,323.41,323.41,323.41,324.5,325.97,325.97,326.6,327.4,329],
-    "Maíz|abril":     [183,183,183,183.2,184.2,184.2,185.5,185.7,186.8,186.9,187.5,188.6,191.73,191.73,191.73,192.46,192.46,194,195.3,196.5,196.8],
-    "Maíz|junio":     [180,184.5,185.5,186,187,190,191],
-    "Trigo|enero":    [182,182,182,219.22,219.22,219.22,219.22,219.22,219.22,219.22,221.13,221.13],
-    "Trigo|diciembre":[213.4,215.5,216,216.1,216.5,218.6,219.5,227.3,229.1,229.8,230.2]
-  },
-  tc: {spot:1383.5, mep:1427.88, blue:1390, fut:{"3":1399}},
-  fas: {Soja:459455,"Maíz":248427,Trigo:265513},
-  evol: {
-    Soja:  [{f:'2026-02-07',p:332.65},{f:'2026-02-13',p:332.65},{f:'2026-03-14',p:335.2},{f:'2026-03-28',p:335.2},{f:'2026-04-01',p:320.05},{f:'2026-04-06',p:316.8},{f:'2026-04-07',p:316.8},{f:'2026-04-16',p:320.05},{f:'2026-04-29',p:320.05},{f:'2026-04-30',p:320.05}],
-    "Maíz":[{f:'2026-02-07',p:183},{f:'2026-02-13',p:183},{f:'2026-03-14',p:181.02},{f:'2026-03-28',p:181.02},{f:'2026-04-01',p:183.25},{f:'2026-04-06',p:187.2},{f:'2026-04-07',p:187.2},{f:'2026-04-16',p:183.25},{f:'2026-04-29',p:183.25},{f:'2026-04-30',p:183.25}],
-    Trigo: [{f:'2026-02-07',p:184.25},{f:'2026-02-13',p:184.25},{f:'2026-03-14',p:189.43},{f:'2026-03-28',p:189.43},{f:'2026-04-01',p:193.55},{f:'2026-04-06',p:199.14},{f:'2026-04-07',p:199.14},{f:'2026-04-16',p:193.55},{f:'2026-04-29',p:193.55},{f:'2026-04-30',p:193.55}]
-  }
-};
-
-let mesBase=4, actC={Soja:true,"Maíz":true,Trigo:true}, per=30, probC='Soja';
-let eC=null, pC=null;
+let DB = null;
+let mesBase = 4;
+let actC = {Soja:true,"Maíz":true,Trigo:true};
+let per = 30, probC = 'Soja';
+let eC = null, pC = null;
 
 const f = (v,d=0) => v==null||isNaN(+v)?'—':Number(v).toLocaleString('es-AR',{minimumFractionDigits:d,maximumFractionDigits:d});
 const fp = v => v==null||isNaN(+v)?'—':Number(v).toFixed(1)+'%';
+const n = v => v==null||v===''?null:parseFloat(String(v).replace(',','.'));
+
+async function fetchSheet(name) {
+  const r = await fetch(BASE + encodeURIComponent(name));
+  const txt = await r.text();
+  const json = JSON.parse(txt.replace(/^[^{]*/, '').replace(/[^}]*$/, ''));
+  const cols = json.table.cols.map(c => c.label);
+  return (json.table.rows || []).map(row => {
+    const obj = {};
+    cols.forEach((col, i) => {
+      const cell = row.c ? row.c[i] : null;
+      obj[col] = cell ? cell.v : null;
+    });
+    return obj;
+  });
+}
+
+function extraerMes(pos) {
+  if (!pos) return null;
+  const s = String(pos).toLowerCase();
+  for (const [nm, v] of Object.entries(MESES)) {
+    if (s.includes(nm.slice(0,3)) || s.includes(nm)) return v;
+  }
+  return null;
+}
+
+async function loadData() {
+  try {
+    const [precios, prob, pases, fas, ref] = await Promise.all([
+      fetchSheet('precios_calculados'),
+      fetchSheet('probabilidades'),
+      fetchSheet('pases_tc'),
+      fetchSheet('fas_y_tnav'),
+      fetchSheet('inflacion_tc_ref'),
+    ]);
+
+    // TC
+    const tcMayRow = ref.find(r => r.tipo === 'TC Mayorista');
+    const tcMepRow = ref.find(r => r.tipo === 'TC MEP');
+    const tcBlueRow = ref.find(r => r.tipo === 'TC Blue' || (r.tipo||'').includes('Blue'));
+    const infRow = ref.find(r => (r.tipo||'').includes('Inflación') || (r.tipo||'').includes('TEA'));
+
+    const tcSpot = n(tcMayRow?.valor);
+    const tcMep = n(tcMepRow?.valor);
+    const tcBlue = n(tcBlueRow?.valor);
+    const inf12m = n(infRow?.valor);
+
+    // TC futuro Rofex desde pases_tc
+    const tcFut = {};
+    pases.filter(r => String(r.tipo||'').includes('TC Futuro')).forEach(r => {
+      const m = extraerMes(r.tipo);
+      if (m && n(r.tc_referencia)) tcFut[m] = n(r.tc_referencia);
+    });
+
+    // Precios disponible por producto/mes
+    const disp = {};
+    precios.filter(r => r.posicion === 'disponible').forEach(r => {
+      const prod = r.producto;
+      const mes = n(r.mes_base);
+      const precio = n(r.precio_usd_tn);
+      if (!disp[prod]) disp[prod] = [];
+      if (mes && precio) disp[prod].push({m: mes, p: precio});
+    });
+
+    // Futuros: una fila por producto/posicion
+    const fut = [];
+    const seen = new Set();
+    precios.filter(r => r.posicion !== 'disponible' && r.posicion !== 'fas_teorico' && r.posicion !== 'pizarra').forEach(r => {
+      const key = `${r.producto}|${r.posicion}`;
+      if (!seen.has(key) && n(r.precio_usd_tn)) {
+        seen.add(key);
+        const mes = extraerMes(r.posicion);
+        if (mes) fut.push({prod: r.producto, pos: r.posicion, mes, usd: n(r.precio_usd_tn)});
+      }
+    });
+
+    // Probabilidades históricas
+    const hist = {};
+    prob.forEach(r => {
+      if (!r.producto || !r.posicion) return;
+      const key = `${r.producto}|${r.posicion}`;
+      // Reconstruir serie desde percentiles
+      hist[key] = {
+        p10: n(r.p10), p25: n(r.p25), p50: n(r.p50), p75: n(r.p75), p90: n(r.p90),
+        prob_actual: n(r.prob_historica_pct),
+        precio_actual: n(r.precio_actual_usd),
+        n: n(r.n_observaciones),
+        min: n(r.minimo), max: n(r.maximo)
+      };
+    });
+
+    // FAS por producto
+    const fasMap = {};
+    fas.forEach(r => {
+      if (r.producto && n(r.fas_teorico_ars) && !fasMap[r.producto]) {
+        fasMap[r.producto] = n(r.fas_teorico_ars);
+      }
+    });
+
+    // Evolucion disponible desde precios (fecha_dato como eje)
+    const evolRaw = {};
+    precios.filter(r => r.posicion === 'disponible' && r.fecha_dato && n(r.precio_usd_tn)).forEach(r => {
+      const prod = r.producto;
+      if (!evolRaw[prod]) evolRaw[prod] = {};
+      const fecha = String(r.fecha_dato).slice(0,10);
+      if (fecha && fecha !== 'None' && fecha !== 'null') {
+        evolRaw[prod][fecha] = n(r.precio_usd_tn);
+      }
+    });
+    const evol = {};
+    Object.entries(evolRaw).forEach(([prod, byDate]) => {
+      evol[prod] = Object.entries(byDate).sort(([a],[b])=>a.localeCompare(b)).map(([f,p])=>({f,p}));
+    });
+
+    // Meses disponibles para selector
+    const mesesDisp = [...new Set(precios.map(r => n(r.mes_base)).filter(Boolean))].sort((a,b)=>a-b);
+    const mesesNombres = {1:'Enero',2:'Febrero',3:'Marzo',4:'Abril',5:'Mayo',6:'Junio',7:'Julio',8:'Agosto',9:'Septiembre',10:'Octubre',11:'Noviembre',12:'Diciembre'};
+
+    // Fecha ultima actualizacion
+    const meta = await fetchSheet('metadata').catch(() => []);
+    const fechaAct = meta[0]?.ultima_ejecucion ? String(meta[0].ultima_ejecucion).slice(0,10) : 'N/D';
+
+    DB = { disp, fut, hist, fasMap, tcSpot, tcMep, tcBlue, inf12m, tcFut, evol };
+
+    // Poblar selector de mes
+    const sel = document.getElementById('mesSelect');
+    sel.innerHTML = mesesDisp.map(m =>
+      `<option value="${m}"${m===4?' selected':''}>${mesesNombres[m]||m} 2026</option>`
+    ).join('');
+    mesBase = mesesDisp.includes(4) ? 4 : mesesDisp[mesesDisp.length-1];
+
+    document.getElementById('updBadge').textContent = `Actualizado: ${fechaAct}`;
+    document.getElementById('statusLbl').textContent = `${fut.length} posiciones cargadas`;
+
+    renderAll();
+
+  } catch(e) {
+    document.getElementById('updBadge').textContent = 'Error al cargar';
+    document.getElementById('statusLbl').textContent = 'Error: ' + e.message;
+    console.error(e);
+  }
+}
 
 function getDisp(prod) {
-  const arr = DB.disp[prod]||[];
-  const hit = arr.find(d=>d.m===mesBase);
+  const arr = (DB.disp[prod] || []);
+  const hit = arr.find(d => d.m === mesBase);
   return hit ? hit.p : (arr[0]||{}).p || null;
 }
 
@@ -205,109 +323,170 @@ function dias(mesPosicion) {
   const base = new Date(2026, mesBase-1, 1);
   const añoPos = mesPosicion > mesBase ? 2026 : 2027;
   const pos = new Date(añoPos, mesPosicion-1, 1);
-  return Math.max(0, Math.round((pos-base)/(864e5)));
+  return Math.max(0, Math.round((pos-base)/864e5));
 }
 
 function tnav(futUSD, dispUSD, d) {
-  if(!dispUSD||!d||d===0) return null;
-  return ((futUSD*DB.tc.spot)/(dispUSD*DB.tc.spot)-1)*365/d*100;
+  if (!dispUSD || !d || d===0) return null;
+  return ((futUSD/dispUSD)-1)*365/d*100;
+}
+
+function renderMetrics() {
+  document.getElementById('ms').textContent = f(getDisp('Soja'),1) || '—';
+  document.getElementById('mm').textContent = f(getDisp('Maíz'),1) || '—';
+  document.getElementById('mt').textContent = f(getDisp('Trigo'),1) || '—';
+  document.getElementById('mtc').textContent = '$' + f(DB.tcSpot);
+  document.getElementById('mmep').textContent = 'MEP $' + f(DB.tcMep);
+  const pase = DB.tcMep && DB.tcSpot ? ((DB.tcMep/DB.tcSpot-1)*100) : null;
+  document.getElementById('mpase').textContent = fp(pase);
+  document.getElementById('minf').textContent = fp(DB.inf12m);
 }
 
 function renderPos() {
-  const cs = ['Soja','Maíz','Trigo'].filter(c=>actC[c]);
+  const cs = ['Soja','Maíz','Trigo'].filter(c => actC[c]);
   let html = '';
   cs.forEach(prod => {
     const d = getDisp(prod);
     const tc = TAG[prod];
-    // fila disponible
-    html += `<tr><td><span class="tag ${tc}">${prod}</span></td><td style="font-family:'DM Sans',sans-serif;font-weight:500;">disponible</td><td>—</td><td>${f(d,1)}</td><td>$${f(d?d*DB.tc.spot:null)}</td><td>—</td><td>—</td><td>—</td></tr>`;
-    // futuros > mesBase
-    DB.fut.filter(fu=>fu.prod===prod && fu.mes>mesBase).forEach(fu=>{
+    html += `<tr><td><span class="tag ${tc}">${prod}</span></td><td style="font-family:'DM Sans',sans-serif;font-weight:500;">disponible</td><td>—</td><td>${f(d,1)}</td><td>$${f(d ? Math.round(d*DB.tcSpot) : null)}</td><td>—</td><td>—</td><td>—</td></tr>`;
+    DB.fut.filter(fu => fu.prod===prod && fu.mes>mesBase).forEach(fu => {
       const di = dias(fu.mes);
-      const pase = d ? fu.usd-d : null;
-      const serie = DB.hist[`${prod}|${fu.pos}`];
+      const pase = d!=null ? fu.usd-d : null;
+      const hkey = `${prod}|${fu.pos}`;
+      const hrow = DB.hist[hkey];
       let prob='—', bc='';
-      if(serie){const p=Math.round(serie.filter(v=>v<=fu.usd).length/serie.length*1000)/10;prob=fp(p);bc=p>=66?'bg':p>=33?'by':'br';}
-      const tv = tnav(fu.usd,d,di);
-      html += `<tr><td><span class="tag ${tc}">${prod}</span></td><td style="font-family:'DM Sans',sans-serif;font-weight:500;">${fu.pos}</td><td>${f(di)}</td><td>${f(fu.usd,1)}</td><td>$${f(fu.usd*DB.tc.spot)}</td><td>${pase!=null?f(pase,1):'—'}</td><td>${prob!=='—'?`<span class="bdg ${bc}">${prob}</span>`:'—'}</td><td>${tv!=null?fp(tv):'—'}</td></tr>`;
+      if (hrow && hrow.prob_actual!=null) {
+        const p = hrow.prob_actual;
+        prob = fp(p);
+        bc = p>=66?'bg':p>=33?'by':'br';
+      }
+      const tv = tnav(fu.usd, d, di);
+      html += `<tr>
+        <td><span class="tag ${tc}">${prod}</span></td>
+        <td style="font-family:'DM Sans',sans-serif;font-weight:500;">${fu.pos}</td>
+        <td>${f(di)}</td>
+        <td>${f(fu.usd,1)}</td>
+        <td>$${f(Math.round(fu.usd*DB.tcSpot))}</td>
+        <td>${pase!=null?f(pase,1):'—'}</td>
+        <td>${prob!=='—'?`<span class="bdg ${bc}">${prob}</span>`:'—'}</td>
+        <td>${tv!=null?fp(tv):'—'}</td>
+      </tr>`;
     });
   });
-  document.getElementById('posBody').innerHTML = html || '<tr><td colspan="8" style="text-align:center;color:var(--muted);padding:16px;">Sin datos</td></tr>';
+  document.getElementById('posBody').innerHTML = html || '<tr><td colspan="8" style="text-align:center;color:var(--muted);padding:16px;">Sin datos para los cultivos seleccionados</td></tr>';
 }
 
 function renderFas() {
-  const cs = ['Soja','Maíz','Trigo'].filter(c=>actC[c]);
+  const cs = ['Soja','Maíz','Trigo'].filter(c => actC[c]);
   document.getElementById('fasBody').innerHTML = cs.map(prod => {
     const d = getDisp(prod);
-    const dARS = d ? Math.round(d*DB.tc.spot) : null;
-    const fas = DB.fas[prod];
-    const br = fas&&dARS ? dARS-fas : null;
+    const dARS = d ? Math.round(d*DB.tcSpot) : null;
+    const fas = DB.fasMap[prod];
+    const br = fas && dARS ? dARS-fas : null;
     const bc = br==null?'':br>=0?'bg':'br';
     return `<tr><td><span class="tag ${TAG[prod]}">${prod}</span></td><td>$${f(fas)}</td><td>$${f(dARS)}</td><td><span class="bdg ${bc}">${br!=null?(br>=0?'+':'')+f(br):'—'}</span></td></tr>`;
   }).join('') || '<tr><td colspan="4" style="text-align:center;color:var(--muted);">Sin datos</td></tr>';
 }
 
 function renderTC() {
-  const rows = Object.entries(DB.tc.fut);
+  const rows = Object.entries(DB.tcFut || {});
   document.getElementById('tcBody').innerHTML = rows.map(([m,tc]) => {
     const d = dias(parseInt(m));
-    const tv = d>0 ? fp(((tc/DB.tc.spot)-1)*365/d*100) : '—';
+    const tv = d>0 ? fp(((tc/DB.tcSpot)-1)*365/d*100) : '—';
     return `<tr><td style="font-family:'DM Sans',sans-serif;">${ML[parseInt(m)]}-26</td><td>$${f(tc)}</td><td><span class="bdg by">${tv}</span></td></tr>`;
   }).join('') || '<tr><td colspan="3" style="text-align:center;color:var(--muted);">Sin datos Rofex</td></tr>';
 }
 
-function renderMetrics() {
-  document.getElementById('ms').textContent = f(getDisp('Soja'),1)||'—';
-  document.getElementById('mm').textContent = f(getDisp('Maíz'),1)||'—';
-  document.getElementById('mt').textContent = f(getDisp('Trigo'),1)||'—';
-}
-
 function renderEvol() {
-  const cs = ['Soja','Maíz','Trigo'].filter(c=>actC[c]);
-  const allD = [...new Set(Object.values(DB.evol).flatMap(a=>a.map(d=>d.f)))].sort();
-  const ref = new Date(2026,3,30);
-  const cut = per>=999 ? allD[0] : (() => {const d=new Date(ref);d.setDate(d.getDate()-per);return d.toISOString().slice(0,10);})();
-  const dates = allD.filter(d=>d>=cut);
-  const labels = dates.map(d=>{const p=d.split('-');return `${p[2]}/${p[1]}`;});
+  const cs = ['Soja','Maíz','Trigo'].filter(c => actC[c]);
+  const allD = [...new Set(Object.values(DB.evol).flatMap(a => a.map(d => d.f)))].sort();
+  const ref = new Date(); ref.setDate(ref.getDate()-1);
+  const cut = per>=999 ? allD[0] : (() => { const d=new Date(ref); d.setDate(d.getDate()-per); return d.toISOString().slice(0,10); })();
+  const dates = allD.filter(d => d >= cut);
+  const labels = dates.map(d => { const p=d.split('-'); return `${p[2]}/${p[1]}`; });
   const datasets = cs.map(prod => {
-    const bd = {};(DB.evol[prod]||[]).forEach(d=>bd[d.f]=d.p);
-    return {label:prod,data:dates.map(d=>bd[d]??null),borderColor:COLOR[prod],backgroundColor:'transparent',borderWidth:2,borderDash:DASH[prod],pointRadius:3,pointBackgroundColor:COLOR[prod],tension:0.3,spanGaps:true};
+    const bd = {}; (DB.evol[prod]||[]).forEach(d => bd[d.f]=d.p);
+    return {label:prod, data:dates.map(d=>bd[d]??null), borderColor:COLOR[prod], backgroundColor:'transparent', borderWidth:2, borderDash:DASH[prod], pointRadius:2, pointBackgroundColor:COLOR[prod], tension:0.3, spanGaps:true};
   });
-  document.getElementById('eLeg').innerHTML = cs.map(c=>`<span class="leg"><span style="width:18px;height:2px;border-radius:2px;background:${COLOR[c]};${DASH[c].length?'border-top:2px dashed '+COLOR[c]+';background:transparent;height:0;':''}display:inline-block;"></span> ${c}</span>`).join('');
-  if(eC) eC.destroy();
-  eC = new Chart(document.getElementById('eChart'),{type:'line',data:{labels,datasets},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>` ${ctx.dataset.label}: USD ${ctx.parsed.y!=null?ctx.parsed.y.toFixed(1):'—'}`}}},scales:{x:{ticks:{font:{size:10,family:'DM Mono'},maxRotation:45,autoSkip:true}},y:{ticks:{font:{size:10,family:'DM Mono'},callback:v=>'USD '+v},grid:{color:'rgba(0,0,0,0.04)'}}}}});
+  document.getElementById('eLeg').innerHTML = cs.map(c =>
+    `<span class="leg"><span style="width:18px;height:2px;border-radius:2px;background:${COLOR[c]};${DASH[c].length?'border-top:2px dashed '+COLOR[c]+';background:transparent;height:0;':''}display:inline-block;"></span> ${c}</span>`
+  ).join('');
+  if (eC) eC.destroy();
+  eC = new Chart(document.getElementById('eChart'), {
+    type:'line', data:{labels, datasets},
+    options:{responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{display:false}, tooltip:{callbacks:{label:ctx=>` ${ctx.dataset.label}: USD ${ctx.parsed.y!=null?ctx.parsed.y.toFixed(1):'—'}`}}},
+      scales:{
+        x:{ticks:{font:{size:10,family:'DM Mono'}, maxRotation:45, autoSkip:true, maxTicksLimit:12}},
+        y:{ticks:{font:{size:10,family:'DM Mono'}, callback:v=>'USD '+v}, grid:{color:'rgba(0,0,0,0.04)'}}
+      }
+    }
+  });
 }
 
 function renderProb() {
   const prod = probC;
-  const all = Object.entries(DB.hist).filter(([k])=>k.startsWith(prod+'|')).flatMap(([,v])=>v);
-  if(!all.length){document.getElementById('pNote').textContent='Sin datos históricos.';return;}
-  const sorted = [...all].sort((a,b)=>a-b);
-  const cdf = sorted.map((v,i)=>({x:parseFloat(v.toFixed(2)),y:parseFloat(((i+1)/sorted.length*100).toFixed(1))}));
-  const sc = DB.fut.filter(f=>f.prod===prod&&f.mes>mesBase).map(f=>{
-    const p=parseFloat((sorted.filter(v=>v<=f.usd).length/sorted.length*100).toFixed(1));
-    return {x:f.usd,y:p,label:f.pos};
+  const hrows = Object.entries(DB.hist).filter(([k]) => k.startsWith(prod+'|'));
+  if (!hrows.length) { document.getElementById('pNote').textContent='Sin datos históricos.'; return; }
+
+  // Usar percentiles del Sheet para construir curva aproximada
+  const points = [];
+  hrows.forEach(([key, h]) => {
+    if (h.min!=null) points.push({x:h.min, y:0});
+    if (h.p10!=null) points.push({x:h.p10, y:10});
+    if (h.p25!=null) points.push({x:h.p25, y:25});
+    if (h.p50!=null) points.push({x:h.p50, y:50});
+    if (h.p75!=null) points.push({x:h.p75, y:75});
+    if (h.p90!=null) points.push({x:h.p90, y:90});
+    if (h.max!=null) points.push({x:h.max, y:100});
   });
-  if(pC) pC.destroy();
-  pC = new Chart(document.getElementById('pChart'),{type:'line',data:{datasets:[
-    {label:'Distribución',data:cdf,borderColor:COLOR[prod],borderWidth:2,backgroundColor:'transparent',pointRadius:0,tension:0.4,type:'line'},
-    {label:'Actual',data:sc,borderColor:'#fff',backgroundColor:'#DC2626',pointRadius:7,pointHoverRadius:9,pointBorderWidth:2,showLine:false,type:'scatter'}
-  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.dataset.type==='scatter'?` ${ctx.raw.label}: USD ${ctx.parsed.x.toFixed(1)} → P${ctx.parsed.y}%`:` USD ${ctx.parsed.x.toFixed(1)} → P${ctx.parsed.y}%`}}},scales:{x:{type:'linear',ticks:{font:{size:10,family:'DM Mono'},callback:v=>'USD '+v},grid:{color:'rgba(0,0,0,0.04)'}},y:{min:0,max:100,ticks:{font:{size:10,family:'DM Mono'},callback:v=>v+'%'},grid:{color:'rgba(0,0,0,0.04)'}}}}});
+  const uniq = [...new Map(points.map(p=>[p.x, p])).values()].sort((a,b)=>a.x-b.x);
+
+  // Puntos actuales
+  const sc = DB.fut.filter(fu => fu.prod===prod && fu.mes>mesBase).map(fu => {
+    const h = DB.hist[`${prod}|${fu.pos}`];
+    const p = h?.prob_actual ?? null;
+    return p!=null ? {x:fu.usd, y:p, label:fu.pos} : null;
+  }).filter(Boolean);
+
+  if (pC) pC.destroy();
+  pC = new Chart(document.getElementById('pChart'), {
+    type:'line',
+    data:{datasets:[
+      {label:'Distribución', data:uniq, borderColor:COLOR[prod], borderWidth:2, backgroundColor:'transparent', pointRadius:0, tension:0.4, type:'line'},
+      {label:'Actual', data:sc, borderColor:'#fff', backgroundColor:'#DC2626', pointRadius:7, pointHoverRadius:9, pointBorderWidth:2, showLine:false, type:'scatter'}
+    ]},
+    options:{responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{display:false}, tooltip:{callbacks:{label:ctx=>
+        ctx.dataset.type==='scatter'
+          ? ` ${ctx.raw.label}: USD ${ctx.parsed.x.toFixed(1)} → P${ctx.parsed.y}%`
+          : ` USD ${ctx.parsed.x.toFixed(1)} → P${ctx.parsed.y}%`
+      }}},
+      scales:{
+        x:{type:'linear', ticks:{font:{size:10,family:'DM Mono'}, callback:v=>'USD '+v}, grid:{color:'rgba(0,0,0,0.04)'}},
+        y:{min:0, max:100, ticks:{font:{size:10,family:'DM Mono'}, callback:v=>v+'%'}, grid:{color:'rgba(0,0,0,0.04)'}}
+      }
+    }
+  });
   const note = sc.map(p=>`${p.label}: USD ${p.x.toFixed(1)} en P${p.y}%`).join(' · ');
   document.getElementById('pNote').textContent = note || 'No hay posiciones futuras para este mes base.';
 }
 
-function renderAll(){renderMetrics();renderPos();renderFas();renderTC();renderEvol();renderProb();document.getElementById('fts').textContent=new Date().toLocaleString('es-AR');}
+function renderAll() {
+  if (!DB) return;
+  renderMetrics(); renderPos(); renderFas(); renderTC(); renderEvol(); renderProb();
+  document.getElementById('fts').textContent = new Date().toLocaleString('es-AR');
+}
 
-function setMesBase(m){mesBase=m;renderAll();}
-function toggleC(c,btn){
+function setMesBase(m) { mesBase=m; renderAll(); }
+function toggleC(c,btn) {
   actC[c]=!actC[c];
   const cls=c==='Soja'?'ps':c==='Maíz'?'pm':'pt';
   btn.className=actC[c]?`pill ${cls}`:'pill';
-  renderPos();renderFas();renderEvol();
+  renderPos(); renderFas(); renderEvol();
 }
-function setPer(p,btn){per=p;document.querySelectorAll('.pp').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderEvol();}
-function setProbC(c,btn){
+function setPer(p,btn) { per=p; document.querySelectorAll('.pp').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); renderEvol(); }
+function setProbC(c,btn) {
   probC=c;
   document.querySelectorAll('#pPills .pill').forEach(b=>b.className='pill');
   const cls=c==='Soja'?'ps':c==='Maíz'?'pm':'pt';
@@ -315,7 +494,7 @@ function setProbC(c,btn){
   renderProb();
 }
 
-renderAll();
+loadData();
 </script>
 </body>
 </html>
