@@ -21,11 +21,11 @@ header{background:var(--card);border-bottom:1px solid var(--border);padding:10px
 .ctrl-grp{display:flex;align-items:center;gap:6px;font-size:12px}
 .ctrl-grp label{font-weight:500;color:var(--text);white-space:nowrap}
 .ctrl-grp select{font-family:var(--sans);font-size:12px;font-weight:500;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:3px 7px;cursor:pointer}
-.inst-bar{background:#0F1923;padding:8px 24px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.inst-lbl{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:.5px;font-weight:500;white-space:nowrap}
-.inst-btn{padding:5px 14px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:1.5px solid #333;background:transparent;color:#888;transition:all .12s;font-family:var(--sans)}
-.inst-btn.active{background:#fff;color:#0F1923;border-color:#fff}
-.inst-desc{font-size:11px;color:#555;margin-left:4px}
+.inst-bar{background:#E8EDF2;border-bottom:1px solid var(--border);padding:8px 24px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.inst-lbl{font-size:10px;color:#475569;text-transform:uppercase;letter-spacing:.5px;font-weight:500;white-space:nowrap}
+.inst-btn{padding:5px 14px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:1.5px solid #CBD5E1;background:var(--card);color:#475569;transition:all .12s;font-family:var(--sans)}
+.inst-btn.active{background:#0F1923;color:#fff;border-color:#0F1923}
+.inst-desc{font-size:11px;color:#64748B;margin-left:4px}
 .fbar{background:var(--card);border-bottom:1px solid var(--border);padding:8px 24px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .fl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-weight:500}
 .pills{display:flex;gap:5px;flex-wrap:wrap}
@@ -91,9 +91,7 @@ footer{padding:10px 24px;border-top:1px solid var(--border);background:var(--car
   <div class="hright">
     <div class="ctrl-grp">
       <label>Precio referencia:</label>
-      <select id="mesRef"></select>
-    </div>
-    <div class="upd" id="updBadge">—</div>
+      <div class="upd" id="updBadge">—</div>
   </div>
 </header>
 
@@ -103,6 +101,10 @@ footer{padding:10px 24px;border-top:1px solid var(--border);background:var(--car
   <button class="inst-btn" onclick="setInstancia(2,this)">2 · Producción 26/27</button>
   <button class="inst-btn" onclick="setInstancia(3,this)">3 · Producción 27/28</button>
   <span class="inst-desc" id="instDesc">Stock actual vs posiciones hasta cosecha campaña 26/27</span>
+  <div style="margin-left:auto;display:flex;align-items:center;gap:8px">
+    <span style="font-size:11px;color:#475569;font-weight:600">Precio referencia:</span>
+    <select id="mesRef" style="font-family:var(--sans);font-size:12px;font-weight:600;color:var(--text);background:var(--card);border:1.5px solid #CBD5E1;border-radius:6px;padding:4px 8px;cursor:pointer"></select>
+  </div>
 </div>
 
 <div class="fbar">
@@ -176,7 +178,7 @@ footer{padding:10px 24px;border-top:1px solid var(--border);background:var(--car
 <script>
 var DISP_HIST={"Girasol":[250,260,270,275,280,285,287,290,292,295,297,298,300,302,305,307,310,312,315,317,320,322,325,327,330,332,335,337,340,342,345,347,350,352,355,357,360,362,365,367,370,372,375,377,380,382,385,387,390,392,395,397,398,399],"Maíz":[155,158,161,163,165,167,169,170,172,174,175,176,178,179,180,181,182,182,183,183,183,183,183,183,183,184,184,185,185,186,187,187,188,189,189,190,191,192,193,194,196,198,199,200,202,204,205,207],"Soja":[157,160,163,165,167,170,172,175,177,180,182,185,187,190,192,195,197,200,202,205,207,210,212,215,217,220,222,225,227,230,232,235,237,240,242,245,247,250,252,255,257,260,262,265,267,270,272,275,277,280,282,285,287,290,292,295,297,300,302,305,307,310,312,315,317,320,321,322,323,324,325,326,327,328,329,330,332,335,337,340,342,345,347,349,350,352,355,357,360,363,365,367,370,372,375,377,380,385,390,395,400,405,410,415,420,430,440,450,460,470,480,490,500,510,522,549],"Trigo":[160,163,165,167,170,172,175,177,180,182,184,185,186,186,187,188,189,189,190,191,192,192,193,193,194,195,196,197,198,199,200,202,205,208,210,213,215,217,219,220,221,222,223,224,225,226,227,228,229,230]};
 var DISP_MAP={"Girasol|1":344.53,"Girasol|2":345.5,"Girasol|3":312.17,"Girasol|4":297.21,"Girasol|5":398.69,"Girasol|6":324.65,"Girasol|7":335.22,"Girasol|8":331.03,"Girasol|9":322.8,"Girasol|10":348.11,"Girasol|11":362.63,"Girasol|12":337.83,"Maíz|1":199.07,"Maíz|2":207.05,"Maíz|3":196.33,"Maíz|4":204.06,"Maíz|5":183.86,"Maíz|6":180.87,"Maíz|7":173.27,"Maíz|8":173.36,"Maíz|9":177.4,"Maíz|10":186.98,"Maíz|11":184.9,"Maíz|12":180.55,"Soja|1":284.34,"Soja|2":308.15,"Soja|3":309.19,"Soja|4":297.67,"Soja|5":312.14,"Soja|6":318.91,"Soja|7":312.5,"Soja|8":307.95,"Soja|9":314.86,"Soja|10":317.55,"Soja|11":301.0,"Soja|12":291.65,"Trigo|1":195.38,"Trigo|2":210.76,"Trigo|3":216.89,"Trigo|4":222.17,"Trigo|5":262.26,"Trigo|6":256.6,"Trigo|7":250.43,"Trigo|8":249.2,"Trigo|9":226.0,"Trigo|10":217.39,"Trigo|11":194.86,"Trigo|12":194.9};
-var FUT_RAW={"Soja|5":323.6,"Soja|7":331.3,"Soja|9":336.4,"Soja|11":340.3,"Soja|5_2027":332.0,"Maíz|5":189.0,"Maíz|6":187.5,"Maíz|7":186.9,"Maíz|9":191.4,"Maíz|12":196.2,"Maíz|4_2027":195.7,"Maíz|7_2027":191.0,"Trigo|5":222.0,"Trigo|7":225.0,"Trigo|12":227.1,"Trigo|1_2027":229.6,"Girasol|3_2027":372.0};
+var FUT_RAW={"Soja|5":323.6,"Soja|7":331.3,"Soja|9":336.4,"Soja|11":340.3,"Soja|5_2027":331.0,"Maíz|5":189.0,"Maíz|6":187.5,"Maíz|7":186.9,"Maíz|9":191.4,"Maíz|12":196.2,"Maíz|4_2027":191.5,"Maíz|7_2027":185.5,"Trigo|5":222.0,"Trigo|7":225.0,"Trigo|12":227.1,"Trigo|1_2027":219.0,"Trigo|12_2027":216.0,"Girasol|3_2027":372.0};
 var FAS={"Soja":465565,"Maíz":251451,"Trigo Pan":271161,"Girasol":530334};
 var EVOL={"Soja":[{"f":"2025-07-01","p":262},{"f":"2025-09-01","p":270},{"f":"2025-11-01","p":275},{"f":"2026-01-01","p":284},{"f":"2026-02-01","p":308},{"f":"2026-03-01","p":309},{"f":"2026-04-01","p":297},{"f":"2026-05-09","p":320}],"Maíz":[{"f":"2025-07-01","p":165},{"f":"2025-09-01","p":172},{"f":"2026-01-01","p":199},{"f":"2026-02-01","p":207},{"f":"2026-03-01","p":196},{"f":"2026-04-01","p":204},{"f":"2026-05-09","p":184}],"Trigo":[{"f":"2025-07-01","p":205},{"f":"2025-09-01","p":198},{"f":"2026-01-01","p":195},{"f":"2026-02-01","p":211},{"f":"2026-03-01","p":217},{"f":"2026-04-01","p":222},{"f":"2026-05-09","p":222}],"Girasol":[{"f":"2025-07-01","p":310},{"f":"2025-09-01","p":322},{"f":"2026-01-01","p":344},{"f":"2026-02-01","p":345},{"f":"2026-03-01","p":312},{"f":"2026-04-01","p":297},{"f":"2026-05-09","p":399}]};
 var TC_SPOT=1393.5;
@@ -197,8 +199,13 @@ var COSECHA={Soja:5,"Maíz":4,Trigo:12,Girasol:3,Sorgo:4,Cebada:12};
 var INST1_MAX={Soja:{m:4,a:2027},"Maíz":{m:4,a:2027},Trigo:{m:11,a:2026},Girasol:{m:3,a:2027},Sorgo:{m:4,a:2027},Cebada:{m:11,a:2026}};
 
 var FUT_LIST=Object.keys(FUT_RAW).map(function(k){
-  var usd=FUT_RAW[k],is27=k.indexOf('_2027')>=0,base=k.replace('_2027',''),parts=base.split('|');
-  return{prod:parts[0],mes:parseInt(parts[1]),ano:is27?2027:2026,usd:usd};
+  var usd=FUT_RAW[k];
+  var ano=2026;
+  if(k.indexOf('_2028')>=0)ano=2028;
+  else if(k.indexOf('_2027')>=0)ano=2027;
+  var base=k.replace('_2028','').replace('_2027','');
+  var parts=base.split('|');
+  return{prod:parts[0],mes:parseInt(parts[1]),ano:ano,usd:usd};
 });
 
 var MESES_REF=[
@@ -219,7 +226,7 @@ function getCampana(offset) {
   return String(inicioAnio).slice(2)+'/'+String(inicioAnio+1).slice(2);
 }
 
-var instancia=1, mesRef=7, anoRef=2025;
+var instancia=1, mesRef=7, anoRef=2025, mesRefLabel='Jul-25';
 var preciosRef={}, actC={Soja:true,"Maíz":true,Trigo:true,Girasol:true,Sorgo:false,Cebada:false};
 var per=365, probC='Soja', eC=null, pC=null;
 var INST_DESC={};
@@ -258,17 +265,17 @@ function getPosiciones(prod){
 
 function buildMesRef(){
   buildInstDesc();
-  document.getElementById('instBtn1').textContent='1 · Stock inicial '+getCampana(0);
-  document.getElementById('instBtn2').textContent='2 · Producción '+getCampana(0);
-  document.getElementById('instBtn3').textContent='3 · Producción '+getCampana(1);
-  document.getElementById('instDesc').textContent=INST_DESC[1];
+  var _b1=document.getElementById('instBtn1');if(_b1)_b1.textContent='1 · Stock inicial '+getCampana(0);
+  var _b2=document.getElementById('instBtn2');if(_b2)_b2.textContent='2 · Producción '+getCampana(0);
+  var _b3=document.getElementById('instBtn3');if(_b3)_b3.textContent='3 · Producción '+getCampana(1);
+  var _id=document.getElementById('instDesc');if(_id)_id.textContent=INST_DESC[1];
   var sel=document.getElementById('mesRef');
   sel.innerHTML=MESES_REF.map(function(s){
     var sel2=(s.m===7&&s.a===2025)?' selected':'';
     return'<option value="'+s.m+'_'+s.a+'"'+sel2+'>'+s.l+'</option>';
   }).join('');
   sel.addEventListener('change',function(){
-    var p=this.value.split('_');mesRef=parseInt(p[0]);anoRef=parseInt(p[1]);preciosRef={};renderAll();
+    var p=this.value.split('_');mesRef=parseInt(p[0]);anoRef=parseInt(p[1]);mesRefLabel=this.options[this.selectedIndex].text;preciosRef={};renderAll();
   });
   document.getElementById('updBadge').textContent='Datos: '+FECHA_DATOS;
 }
@@ -277,7 +284,7 @@ function setInstancia(n,btn){
   instancia=n;
   document.querySelectorAll('.inst-btn').forEach(function(b){b.classList.remove('active');});
   btn.classList.add('active');
-  buildInstDesc();document.getElementById('instDesc').textContent=INST_DESC[n];
+  buildInstDesc();var _id2=document.getElementById('instDesc');if(_id2)_id2.textContent=INST_DESC[n];
   preciosRef={};
   var vals={1:'7_2025',2:'5_2026',3:'5_2026'};
   var sel=document.getElementById('mesRef');
@@ -325,7 +332,7 @@ function renderPos(){
     var tcRARS=refP?Math.round(refP*getTcFut(mesRef,anoRef)):null;
     html+='<tr class="tr-ref">'+
       '<td><span class="tag '+tc+'">'+prod+'</span></td>'+
-      '<td class="tdname">referencia</td><td>—</td>'+
+      '<td class="tdname">'+mesRefLabel+'</td><td>—</td>'+
       '<td>'+f(refP,1)+'</td>'+
       '<td>'+(probR!=null?'<span class="bdg '+bcR+'">'+fp(probR)+'</span>':'—')+'</td>'+
       '<td>—</td>'+
